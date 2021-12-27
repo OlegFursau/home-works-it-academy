@@ -7,23 +7,23 @@
 
 
 
-function pow(x, n) {
+// function pow(x, n) {
 
-    if (n == 1) {
-        return x;
-    } else {
-        return x *= pow(x, n - 1);
-    }
-}
+//     if (n == 1) {
+//         return x;
+//     } else {
+//         return x *= pow(x, n - 1);
+//     }
+// }
 
-var x = +prompt('number')
-var n = +prompt('number')
+// var x = +prompt('number')
+// var n = +prompt('number')
 
-if (n < 0 || n == '' || !Number.isInteger(n)) {
-    alert('Введите целую степень!')
-} else {
-    alert(pow(x, n))
-}
+// if (n < 0 || n == '' || !Number.isInteger(n)) {
+//     alert('Введите целую степень!')
+// } else {
+//     alert(pow(x, n))
+// }
 
 
 
@@ -50,27 +50,27 @@ if (n < 0 || n == '' || !Number.isInteger(n)) {
 
 //цикл
 
-function sumTo(n) { //самый медленный но этот способ не использует контестный стейк а соответственно и не использует большой объем памяти
+// function sumTo(n) { //самый медленный но этот способ не использует контестный стейк а соответственно и не использует большой объем памяти
 
-    var a = 0;
+//     var a = 0;
 
-    for (i = 0; i <= n; i++) {
-        a += i
-    }
+//     for (i = 0; i <= n; i++) {
+//         a += i
+//     }
 
-    return a;
-}
+//     return a;
+// }
 
 
 
 //рекурсия 
 
-function sumTo(n) { //самый быстрый способ код можно легко поддерживать минус ограничена глубина рекрсии потому каждый раз рекурсирую записывается новый контекс 
-    // с записию в ппамять  что в свою очередь для больших процесов требует большое колво памяти
+// function sumTo(n) { //самый быстрый способ код можно легко поддерживать минус ограничена глубина рекрсии потому каждый раз рекурсирую записывается новый контекс 
+//     // с записию в ппамять  что в свою очередь для больших процесов требует большое колво памяти
 
-    if (n === 1) return 1;
-    return n + sumTo(n - 1);
-}
+//     if (n === 1) return 1;
+//     return n + sumTo(n - 1);
+// }
 
 // alert(sumTo(100000)); //Максимальная глубина рекурсии ограничена движком JavaScript. 
 
@@ -78,11 +78,11 @@ function sumTo(n) { //самый быстрый способ код можно �
 
 //формула для суммы арифметической прогрессии
 
-function sumTo(n) { // наверное самая быстрая и не использует большой объем памяти
+// function sumTo(n) { // наверное самая быстрая и не использует большой объем памяти
 
-    return n * (n + 1) / 2;
-}
-alert(sumTo(100));
+//     return n * (n + 1) / 2;
+// }
+// alert(sumTo(100));
 
 
 
@@ -106,54 +106,107 @@ alert(sumTo(100));
 //         [9, []],
 //         1, 8
 //       ]
+// Array[element] == typeof Number && Array[element] != null && Array.length > 0)
 
-
-
+// i == Array[element]
 var arr = [
     5, 7, [4, [2], 8, [1, 3], 2],
     [9, []],
     1, 8
 ];
 
-var sum = 0;
-var num;
-var length;
+//124,2,8,1,3,29,18
 
-checkNum(arr);
-checkArray(arr);
-console.log(treeSum(arr));
+//typeof Number(array[i]) && isNaN(array[i]
+//var i = 0; i < array.length; i++
 
-
-
-function checkNum() {
-
-    for (value of arr) {
-        value !== NaN ? num = true : alert('есть не верное значение')
-    }
-}
-// console.log(num);
-
-function checkArray() {
-    for (var i = 0; i < arr.length; i++) {
-        i >= 0 ? length = true : alert('это не массив');
-    }
-}
-
-// console.log(len);
 
 
 
 function treeSum(array) {
+    var sum = 0;
+    for (var i = 0; i < array.length; i++) {
+        var item = array[i];
+        if (typeof(item) == 'number' && item != NaN) {
+            sum += item;
+        } else if (typeof(item) == 'object') {
+            sum += treeSum(item);
 
-    if (num === true && length === true) {
+            //console.log(item);
+        }
 
-        array.forEach(function(value, index) {
-
-            value instanceof Array ? treeSum(value) : sum += value;
-
-            return sum;
-        });
+        // console.log(sum);
     }
-
     return sum
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+//     if (typeof Number(array[i]) && isNaN(array[i]) {
+//             treeSum(i)
+//         } else {
+//             sum += i;
+//         }
+
+
+
+
+
+
+console.log(treeSum(arr));
+
+
+
+
+
+
+
+
+
+
+// var arr = [
+//     5, 7, [4, [2], 8, [1, 3], 2],
+//     [9, []],
+//     1, 8
+// ];
+// var sum = 0;
+// var num;
+// var length;
+// checkNum(arr);
+// checkArray(arr);
+// console.log(treeSum(arr));
+
+// function checkNum() {
+//     for (value of arr) {
+//         value !== NaN ? num = true : alert('есть не верное значение')
+//     }
+// }
+// // console.log(num);
+
+// function checkArray() {
+//     for (var i = 0; i < arr.length; i++) {
+//         i >= 0 ? length = true : alert('это не массив');
+//     }
+// }
+
+
+
+// function treeSum(array) {
+//     if (num === true && length === true) {
+//         array.forEach(function(value, index) {
+//             value instanceof Array ? treeSum(value) : sum += value;
+//             return sum;
+//         });
+//     }
+//     return sum
+// }
